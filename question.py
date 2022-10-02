@@ -51,4 +51,4 @@ class Question:
             if self.door_map[i] == 1:
                 car_index = i
         
-        return self.chosen == car_index 
+        return self.chosen_door == car_index 
