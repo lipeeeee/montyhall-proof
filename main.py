@@ -1,4 +1,3 @@
-from imp import new_module
 from question import Question
 
 def main():

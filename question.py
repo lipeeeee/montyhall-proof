@@ -1,4 +1,3 @@
-from decimal import Overflow
 from random import randint
 
 # Main class
