@@ -4,6 +4,7 @@ from random import randint
 # Main class
 class Question:
     def __init__(self):
+        self.chosen_door = None # 0 - 2
         self.door_map = {}
         self.opened_map = {} # Map of opened doors(chosen and shown)
 
@@ -28,8 +29,27 @@ class Question:
             Exception("Out of bounds index")
             return -999
 
+        # Update chosen
+        self.chosen_door = number
+
         # Show a goat
         for i in range(len(self.door_map)):
             if self.door_map[i] != 1 and i != number:
                 self.opened_map[i] = 1
                 return
+    
+    # Change to the other hidden door
+    def change(self):
+        for i in range(len(self.door_map)):
+            # Choose the door which isnt chosen and it is hidden
+            if i != self.chosen_door and self.opened_map[i] == 0:
+                self.chosen = i
+
+    # returns True or False if the user got the car or not
+    def get_veredict(self):
+        car_index = None
+        for i in range(len(self.door_map)):
+            if self.door_map[i] == 1:
+                car_index = i
+        
+        return self.chosen == car_index 
