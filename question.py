@@ -4,6 +4,7 @@ from random import randint
 class Question:
     def __init__(self):
         self.chosen_door = None # 0 - 2
+        self.car_door = randint(0, 2)
         self.door_map = {}
         self.opened_map = {} # Map of opened doors(chosen and shown)
 
@@ -11,10 +12,8 @@ class Question:
         self.map_shown()
 
     def map_questions(self):
-        car_door = randint(0, 2)
-
         for i in range(3):
-            if i == car_door:
+            if i == self.car_door:
                 self.door_map[i] = 1
             else:
                 self.door_map[i] = 0
@@ -33,7 +32,7 @@ class Question:
 
         # Show a goat
         for i in range(len(self.door_map)):
-            if self.door_map[i] != 1 and i != number:
+            if self.door_map[i] == 0 and i != self.chosen_door:
                 self.opened_map[i] = 1
                 return
     
@@ -42,13 +41,9 @@ class Question:
         for i in range(len(self.door_map)):
             # Choose the door which isnt chosen and it is hidden
             if i != self.chosen_door and self.opened_map[i] == 0:
-                self.chosen = i
+                self.chosen_door = i
+                return
 
     # returns True or False if the user got the car or not
     def get_veredict(self):
-        car_index = None
-        for i in range(len(self.door_map)):
-            if self.door_map[i] == 1:
-                car_index = i
-        
-        return self.chosen_door == car_index 
+        return self.chosen_door == self.car_door 

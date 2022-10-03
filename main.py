@@ -9,20 +9,20 @@ def main():
     # Calculate no change accuracy
     print("Calculating No Change Accuracy...")
     count = 0
-    for i in range(globals.EPOCHS):
+    for _ in range(globals.EPOCHS):
         veredict = random_attempt(change_door=False)
         if veredict == True:
             count += 1
-    no_change_acc = (count / globals.EPOCHS) * 100
+    no_change_acc = (count / globals.EPOCHS * 100)
 
     # Calculate change accuracy
     print("Calculating Change Accuracy...")
     count = 0
-    for i in range(globals.EPOCHS):
+    for _ in range(globals.EPOCHS):
         veredict = random_attempt(change_door=True)
         if veredict == True:
             count += 1
-    change_acc = (count / globals.EPOCHS) * 100
+    change_acc = (count / globals.EPOCHS * 100)
 
     # Print veredict
     print(f"\nChange accuraccy: {(change_acc)}")
@@ -32,7 +32,8 @@ def random_attempt(change_door):
     question = Question()
 
     # Choose door
-    question.choose(randint(0, 2))
+    rnd = randint(0, 2)
+    question.choose(rnd)
 
     # Check if change_door
     if change_door == True:
